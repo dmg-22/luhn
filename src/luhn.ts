@@ -1,45 +1,28 @@
-export default function validate(stringToValidate: string) {
-  let trimmed = stringToValidate.replace(/[\s]/g, ""),
-    length: number = trimmed.length,
-    odd: boolean = false,
-    total: number = 0,
-    calc: number,
-    calc2: number;
+// Lookup table for doubled digits
+const DOUBLED_DIGITS = [0, 2, 4, 6, 8, 1, 3, 5, 7, 9];
 
-  if (!/^[0-9]+$/.test(trimmed)) {
-    return false;
-  }
-
-  for (let i = length; i > 0; i--) {
-    calc = parseInt(trimmed.charAt(i - 1));
-    if (!odd) {
-      total += calc;
-    } else {
-      calc2 = calc * 2;
-
-      switch (calc2) {
-        case 10:
-          calc2 = 1;
-          break;
-        case 12:
-          calc2 = 3;
-          break;
-        case 14:
-          calc2 = 5;
-          break;
-        case 16:
-          calc2 = 7;
-          break;
-        case 18:
-          calc2 = 9;
-          break;
-        default:
-          calc2 = calc2;
-      }
-      total += calc2;
+export default function validate(stringToValidate: string): boolean {
+  // Early return for empty strings
+  if (!stringToValidate) return false;
+  
+  const str = stringToValidate.replace(/\s/g, '');
+  
+  // Early validation
+  if (!/^\d+$/.test(str) || str.length < 2) return false;
+  
+  let sum = 0;
+  let isEven = str.length % 2 === 0;
+  
+  // Process string directly without parseInt where possible
+  for (let i = 0; i < str.length; i++) {
+    let digit = str.charCodeAt(i) - 48; // Convert char to number
+    
+    if (isEven === (i % 2 === 0)) {
+      digit = DOUBLED_DIGITS[digit];
     }
-    odd = !odd;
+    
+    sum += digit;
   }
-
-  return total !== 0 && total % 10 === 0;
-};
+  
+  return sum > 0 && sum % 10 === 0;
+}

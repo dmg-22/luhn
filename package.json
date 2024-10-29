@@ -18,6 +18,7 @@
   "scripts": {
     "build": "tsup",
     "test": "mocha tests/luhn-tests.js -R spec",
+    "benchmark": "node benchmark/luhn.bench.js",
     "semantic-release": "semantic-release"
   },
   "keywords": [
@@ -29,6 +30,7 @@
     "url": "https://github.com/JamesEggers1/luhn/issues"
   },
   "devDependencies": {
+    "benchmark": "^2.1.4",
     "mocha": "^10.2.0",
     "semantic-release": "^21.0.5",
     "should": "^5.0.1",

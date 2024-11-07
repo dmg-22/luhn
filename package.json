@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/JamesEggers1/luhn.git"
   },
-  "main": "./dist/luhn",
+  "main": "./dist/luhn.js",
   "types": "./dist/luhn.d.ts",
   "type": "module",
   "engines": {
@@ -17,8 +17,9 @@
   },
   "scripts": {
     "build": "tsup",
-    "test": "mocha tests/luhn-tests.js -R spec",
-    "semantic-release": "semantic-release"
+    "test": "mocha tests/luhn-tests.js tests/luhnOptimized-tests.js -R spec",
+    "semantic-release": "semantic-release",
+    "benchmark": "ts-node --esm benchmark/luhnBenchmark.ts"
   },
   "keywords": [
     "credit-card",
@@ -29,10 +30,15 @@
     "url": "https://github.com/JamesEggers1/luhn/issues"
   },
   "devDependencies": {
+    "@types/benchmark": "^2.1.5",
     "mocha": "^10.2.0",
     "semantic-release": "^21.0.5",
     "should": "^5.0.1",
+    "ts-node": "^10.9.2",
     "tsup": "^7.0.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "benchmark": "^2.1.4"
   }
 }

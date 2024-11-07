@@ -18,6 +18,7 @@
   "scripts": {
     "build": "tsup",
     "test": "mocha tests/luhn-tests.js tests/luhnOptimized-tests.js -R spec",
+    "test-unified": "mocha tests/luhn-tests.js -R spec",
     "semantic-release": "semantic-release",
     "benchmark": "ts-node --esm benchmark/luhnBenchmark.ts"
   },
